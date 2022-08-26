@@ -5,7 +5,3 @@ function check_MDAL()
     end
     nothing
 end
-
-macro check(obj, ex)
-    return :($(esc(ex)) == 0 ? nothing : laszip_error($(esc(obj))))
-end
