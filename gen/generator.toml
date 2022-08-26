@@ -1,0 +1,20 @@
+[general]
+library_name = "mdal"
+output_file_path = "../src/mdal_api.jl"
+use_julia_native_enum_type = true
+print_using_CEnum = false
+use_deterministic_symbol = true
+is_local_header_only = true
+smart_de_anonymize = true
+printer_blacklist = [
+]
+output_api_file_path = "../src/mdal_api.jl"
+output_common_file_path = "../src/mdal_common.jl"
+
+[codegen]
+use_ccall_macro = true
+use_julia_bool = true
+always_NUL_terminated_string = true
+is_function_strictly_typed = false
+opaque_func_arg_as_PtrCvoid = false
+opaque_as_mutable_struct = false

@@ -1,23 +1,11 @@
-const errors = CEnum.namemap(MDAL_Status)
-
-function check_MDAL(p::Ptr{Nothing})
-    if p != C_NULL
-        return p
-    else
-        state = errors[Int(MDAL.MDAL_LastStatus())]
-        if state == :None
-            return p
-        else
-            error(state)
-        end
+function check_MDAL()
+    status = MDAL_LastStatus()
+    if status != MDAL.None
+        error(status)
     end
+    nothing
 end
 
-function check_MDAL(p::Any)
-    state = errors[Int(MDAL.MDAL_LastStatus())]
-    if state == :None
-        p
-    else
-        error(state)
-    end
+macro check(obj, ex)
+    return :($(esc(ex)) == 0 ? nothing : laszip_error($(esc(obj))))
 end

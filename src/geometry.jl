@@ -21,8 +21,8 @@ struct MDALNodeIterator
 end
 Base.length(i::MDALNodeIterator) = i.l
 
-function Base.iterate(i::MDALNodeIterator, _state=nothing; buffer=1)
-    coords = repeat([0., 0., 0.], buffer)
+function Base.iterate(i::MDALNodeIterator, _state = nothing; buffer = 1)
+    coords = repeat([0.0, 0.0, 0.0], buffer)
     count = MDAL_VI_next(i.p, buffer, coords)
     if count == 0
         MDAL_VI_close(i.p)
@@ -42,8 +42,8 @@ struct MDALFaceIterator
 end
 Base.length(i::MDALFaceIterator) = i.l
 
-function Base.iterate(i::MDALFaceIterator, _state=nothing; buffer=1)
-    coords = repeat([0., 0., 0.], buffer)
+function Base.iterate(i::MDALFaceIterator, _state = nothing; buffer = 1)
+    coords = repeat([0.0, 0.0, 0.0], buffer)
     count = MDAL_VI_next(i.p, buffer, coords)
     if count == 0
         MDAL_VI_close(i.p)

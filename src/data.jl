@@ -2,7 +2,7 @@ struct DataSetGroup
     name::AbstractString
     p::Ptr{Nothing}
     l::Int
-    meta::Dict{AbstractString, AbstractString}
+    meta::Dict{AbstractString,AbstractString}
 end
 Base.length(dsg::DataSetGroup) = MDAL_G_datasetCount(dsg.p)
 
@@ -14,8 +14,10 @@ function DataSetGroup(p::Ptr{Nothing}, i::Int)
     l = MDAL_G_datasetCount(group)
     c = MDAL_G_metadataCount(group)
     @info "$c metadata in datasetgroup"
-    m = Dict(unsafe_string(MDAL_G_metadataKey(group, i)) =>
-             unsafe_string(MDAL_G_metadataValue(group, i)) for i in 0:c-1)
+    m = Dict(
+        unsafe_string(MDAL_G_metadataKey(group, i)) =>
+            unsafe_string(MDAL_G_metadataValue(group, i)) for i = 0:c-1
+    )
     DataSetGroup(name, group, l, m)
 end
 
@@ -23,7 +25,7 @@ DataSetGroup(m::MDALMesh, i::Int) = DataSetGroup(m.mdalm, i)
 function DataSetGroups(m::MDALMesh)
     c = MDAL_M_datasetGroupCount(m.mdalm)
     @info "$c groups in mesh"
-    (DataSetGroup(m, i) for i in 1:c-1)
+    (DataSetGroup(m, i) for i = 1:c-1)
 end
 
 struct DataSet
@@ -42,5 +44,5 @@ end
 function DataSets(p::DataSetGroup)
     c = MDAL_G_datasetCount(p.p)
     @info "$c datasets in group"
-    (DataSet(p, i) for i in 1:c-1)
+    (DataSet(p, i) for i = 1:c-1)
 end
