@@ -1,7 +1,6 @@
 module MDAL
 
 using MDAL_jll
-const mdal = :libmdal
 
 
 include("mdal_common.jl")

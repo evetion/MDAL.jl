@@ -4,7 +4,9 @@ using Downloads
 
 @testset "MDAL.jl" begin
 
-    test_nc = Downloads.download("https://github.com/lutraconsulting/MDAL/raw/master/tests/data/ugrid/D-Flow1.2/bw_11_zonder_riviergrid_met_1dwtg_clm.nc")
+    test_nc = Downloads.download(
+        "https://github.com/lutraconsulting/MDAL/raw/master/tests/data/ugrid/D-Flow1.2/bw_11_zonder_riviergrid_met_1dwtg_clm.nc",
+    )
 
     # Check version
     @test unsafe_string(MDAL.MDAL_Version()) == "0.9.4"
